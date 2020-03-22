@@ -1,4 +1,5 @@
-function expressionCalculator(expr) {
+
+   function expressionCalculator(expr) {
     if (check(expr)==false){throw("ExpressionError: Brackets must be paired")};
 let calcStringArr=expr.split('');
 
@@ -19,24 +20,69 @@ for (let i=0;i<calcStringArr.length;i++){
 };
 };
 
+
+
+outer:for (i=0;i<calcStringArr.length;i++){
+    if (calcStringArr[i]=="("){  
+        for (let j=i+1;j<calcStringArr.length;j++){
+                        if (calcStringArr[j]=="("){break}
+                                if (calcStringArr[j]==")"){     
+                                                 
+                          calcStringArr.splice(i,j-i+1,calc2(calcStringArr.slice(i+1,j))); break outer ;
+                                                                
+                                                            }; 
+
+                                             
+                                                    }
+                                            }
+
+                                        }
+                                        for (i=0;i<calcStringArr.length;i++){
+                                            if (calcStringArr[i]=="("){ calcBreckets2(calcStringArr) }}
+
+calcBreckets2(calcStringArr)
+function calcBreckets2(calcStringArr){
+    outer:for (i=0;i<calcStringArr.length;i++){
+        if (calcStringArr[i]=="("){  
+            for (let j=i+1;j<calcStringArr.length;j++){
+                            if (calcStringArr[j]=="("){break}
+                                    if (calcStringArr[j]==")"){     
+                                                     
+                              calcStringArr.splice(i,j-i+1,calc2(calcStringArr.slice(i+1,j))); break outer ;
+                                                                    
+                                                                }; 
+    
+                                                 
+                                                        }
+                                                }
+    
+                                            }
+return calcStringArr;
+}
+
+
 calc2 (calcStringArr);
 function calc2 (calcStringArr) {
 
 if(calcStringArr.length>0){
     for (i=0;i<calcStringArr.length;i++){
         if(calcStringArr[i]=='*'||calcStringArr[i]=='/'){
-            calcStringArr.splice(i-1,3,calc(calcStringArr[i-1],calcStringArr[i],calcStringArr[i+1]));i=i-1}
+            calcStringArr.splice(i-1,3,calc(calcStringArr[i-1],calcStringArr[i],calcStringArr[i+1]));i=i-2;}
     };
 }
 
 if(calcStringArr.length>0){
     for (i=0;i<calcStringArr.length;i++){
         if(calcStringArr[i]=='+'||calcStringArr[i]=='-'){
-            calcStringArr.splice(i-1,3,calc(calcStringArr[i-1],calcStringArr[i],calcStringArr[i+1]));i=i-1}
+            calcStringArr.splice(i-1,3,calc(calcStringArr[i-1],calcStringArr[i],calcStringArr[i+1]));i=i-2}
     };
 }
-return calcStringArr
+
+return Number(calcStringArr.join(''));
 }
+
+
+
 if (calcStringArr.length>0){calc2 (calcStringArr)}
 
 
@@ -46,7 +92,7 @@ return Number(calcStringArr.join(''));
 
 
 
-console.log('what',calcStringArr);
+
 let firstNumber, operator, secondNumber;
 firstNumber=calcStringArr[0];
 operator=calcStringArr[1];
@@ -119,8 +165,13 @@ function check(str) {
 
     }
     return true
-}
-
+    
+      
+      // your solution
+    }
+    
+    
+    
 module.exports = {
     expressionCalculator
 }
